@@ -11,7 +11,7 @@
         //Log::text($_POST['payload']);
 
         foreach ($data->commits as $commit) {
-        	Log::text( 'Repository updated by "' . $data->pusher->name .'": "' . $commit->message . '"', $repository->name );	
+        	Log::text( 'Repository updated by ' . $data->pusher->name .': ' . $commit->message, $repository->name );	
         }
 
         
