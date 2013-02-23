@@ -4,10 +4,16 @@
     if ( isset( $_POST[ 'payload' ] ) ) :
         $data = json_decode( $_POST[ 'payload' ] );
         $repository = $data->repository;
-        if ( !isset( $_GET[ 'pull' ] ) || $_GET[ 'pull' ] == 'yes' ) :
-            $systemCall = 'git --git-dir=../' . $repository->name . '/.git --work-tree=../' . $repository->name . ' pull';
-            exec( $systemCall, $output );
-        endif;
-        Log::text( 'Repository updated by "' . $data->pusher->name . '"', $repository->name );
+        $systemCall = 'git --git-dir=' . __DIR__ . '/../repos/' . $repository->name . '/.git --work-tree=' . __DIR__ . '/../repos/' . $repository->name . ' pull';
+
+        exec( $systemCall, $output );
+
+        //Log::text($_POST['payload']);
+
+        foreach ($data->commits as $commit) {
+        	Log::text( 'Repository updated by "' . $data->pusher->name .'": "' . $commit->message . '"', $repository->name );	
+        }
+
+        
     endif;
 ?>
