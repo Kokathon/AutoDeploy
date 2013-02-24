@@ -13,7 +13,7 @@
 
             $systemCall = 'git clone ' . $repo->git_url . ' ' . __DIR__ . '/../repos/' . $repo->name . '/';
 
-            exec( $systemCall, $output );
+            exec( escapeshellcmd($systemCall), $output );
             Log::Text( 'Repository "' . $repo->name . '" created and cloned', 'AutoDeploy' );
 
 

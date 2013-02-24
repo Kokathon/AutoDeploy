@@ -6,7 +6,7 @@
         $repository = $data->repository;
         $systemCall = 'git --git-dir=' . __DIR__ . '/../repos/' . $repository->name . '/.git --work-tree=' . __DIR__ . '/../repos/' . $repository->name . ' pull';
 
-        exec( $systemCall, $output );
+        exec( escapeshellcmd($systemCall), $output );
 
         //Log::text($_POST['payload']);
 
