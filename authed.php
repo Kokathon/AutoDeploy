@@ -1,4 +1,7 @@
 <?php
+
+    $location = 'http://' . str_replace(basename(__DIR__), '', $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']));
+
     include( 'include/default.php' );
 
     if ( isset( $_GET[ 'code' ] ) ) :
@@ -15,13 +18,10 @@
 
             exec( escapeshellcmd($systemCall), $output );
             Log::Text( 'Repository "' . $repo->name . '" created and cloned', 'AutoDeploy' );
-
-
-            header('Location: http://kokarn.com/kokathon/');
-
        else :
             Log::Text( 'Failed to get access token for "' . $repoName  .'"', 'AutoDeploy' );
-            header('Location: http://kokarn.com/kokathon/');
         endif;
     endif;
+
+    header('Location: ' . $location);
 ?>
